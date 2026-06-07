@@ -3,8 +3,9 @@ from pathlib import Path
 import pandas as pd
 
 
-DATA_PATH = Path("/Users/mihail/Downloads/ml-latest-small")
-OUTPUT_PATH = Path("/Users/mihail/Documents/Codex/2026-06-05/files-mentioned-by-the-user-links/task1_movielens_results.md")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "ml-latest-small"
+OUTPUT_PATH = PROJECT_ROOT / "reports" / "ml-latest-small" / "task1_movielens_results.md"
 GENRES = ["Animation", "Romance", "Documentary"]
 
 
@@ -112,6 +113,7 @@ def main() -> None:
             ),
         )
 
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(OUTPUT_PATH)
 

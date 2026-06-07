@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pyspark.sql import SparkSession, Window
 from pyspark.sql.functions import (
     abs as spark_abs,
@@ -15,7 +17,8 @@ from pyspark.sql.functions import (
 )
 
 
-DATA_PATH = "/Users/mihail/Downloads/ml-latest-small/ratings.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "ml-latest-small" / "ratings.csv"
 SEED = 42
 MIN_COMMON_USERS = 5
 TOP_K = 30
@@ -31,7 +34,7 @@ ratings = (
     spark.read
     .option("header", True)
     .option("inferSchema", True)
-    .csv(DATA_PATH)
+    .csv(str(DATA_PATH))
 )
 
 train_init, test = ratings.randomSplit([0.8, 0.2], seed=SEED)

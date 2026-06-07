@@ -6,11 +6,9 @@ import numpy as np
 import pandas as pd
 
 
-DATA_PATH = Path("/Users/mihail/Downloads/ml-latest/ratings.csv")
-OUTPUT_PATH = Path(
-    "/Users/mihail/Documents/Codex/2026-06-05/files-mentioned-by-the-user-links/"
-    "task2_movielens_latest_results.md"
-)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "ml-latest" / "ratings.csv"
+OUTPUT_PATH = PROJECT_ROOT / "reports" / "ml-latest" / "task2_movielens_latest_results.md"
 
 SEED = 42
 TRAIN_FRAC = 0.8
@@ -287,6 +285,7 @@ def main() -> None:
             "",
         ]
     )
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(report, encoding="utf-8")
 
     print(f"item_cf_rmse={item_cf_rmse:.6f}", flush=True)

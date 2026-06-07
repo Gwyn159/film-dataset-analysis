@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pyspark.sql import SparkSession, Window
 from pyspark.sql.functions import (
     asc,
@@ -13,7 +15,8 @@ from pyspark.sql.functions import (
 )
 
 
-DATA_PATH = "/Users/mihail/Downloads/ml-latest"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "ml-latest"
 GENRES = ["Animation", "Romance", "Documentary"]
 
 
@@ -27,14 +30,14 @@ movies = (
     spark.read
     .option("header", True)
     .option("inferSchema", True)
-    .csv(f"{DATA_PATH}/movies.csv")
+    .csv(str(DATA_PATH / "movies.csv"))
 )
 
 ratings = (
     spark.read
     .option("header", True)
     .option("inferSchema", True)
-    .csv(f"{DATA_PATH}/ratings.csv")
+    .csv(str(DATA_PATH / "ratings.csv"))
 )
 
 movie_genres = (
