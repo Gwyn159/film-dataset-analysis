@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+data/ml-latest/
+data/ml-latest-small/
+
+.DS_Store
+.env
+.venv/
+venv/
